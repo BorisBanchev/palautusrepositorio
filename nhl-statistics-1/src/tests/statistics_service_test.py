@@ -1,5 +1,5 @@
 import unittest
-from statistics_service import StatisticsService
+from statistics_service import StatisticsService, SortBy, Enum
 from player import Player
 
 class PlayerReaderStub:
@@ -40,7 +40,14 @@ class TestStatisticsService(unittest.TestCase):
         top_players = self.stats.top(2)
         self.assertEqual(print(top_players),print([Player("Gretzky", "EDM", 35, 89),Player("Lemieux", "PIT", 45, 54),Player("Yzerman", "DET", 42, 56)]))
 
+    def test_palauttaa_kärkipelaajat_maalejen_mukaan(self):
+        top_players = self.stats.top(2,SortBy.GOALS)
+        self.assertEqual(print(top_players),print([Player("Lemieux", "PIT", 45, 54), Player("Yzerman", "DET", 42, 56), Player("Kurri",   "EDM", 37, 53)]))
         
+    def test_palauttaa_kärkipelaajat_syottojen_mukaan(self):
+        top_players = self.stats.top(2,SortBy.ASSISTS)
+        self.assertEqual(print(top_players),print([Player("Gretzky", "EDM", 35, 89), Player("Yzerman", "DET", 42, 56), Player("Lemieux", "PIT", 45, 54)]))
 
-        
-
+    def test_virheellinen_lajittelu_kriteeri(self):
+        with self.assertRaises(ValueError):
+            self.stats.top(2,SortBy.INVALID)
