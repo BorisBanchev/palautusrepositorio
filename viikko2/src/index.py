@@ -13,10 +13,12 @@ def main():
     for player_dict in response:
         player = Player(player_dict)
         players.append(player)
+    
+    players_sorted = sorted(players, key = lambda player: player.goals + player.assists, reverse=True)
 
     print("Players from FIN\n")
 
-    for player in players:
+    for player in players_sorted:
         if player.nationality == "FIN":
             print(player)
 
