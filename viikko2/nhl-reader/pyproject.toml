@@ -1,11 +1,14 @@
 [tool.poetry]
-name = "nhl-reader"
+name = "src"
 version = "0.1.0"
 description = ""
-authors = ["Your Name <you@example.com>"]
+authors = ["BorisBanchev <boris.banchev@helsinki.com>"]
+readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
+requests = "^2.32.3"
+rich = "^13.9.4"
 
 
 [build-system]
