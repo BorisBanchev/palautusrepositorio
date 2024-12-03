@@ -29,6 +29,25 @@ def main():
     for player in stats.matches(matcher):
         print(player)
 
+    # return players that satisfy at least one of the queries
+    m1 = (
+    query
+    .plays_in("PHI")
+    .has_at_least(10, "assists")
+    .has_fewer_than(10, "goals")
+    .build()
+    )
+
+    m2 = (
+    query
+    .plays_in("EDM")
+    .has_at_least(50, "points")
+    .build()
+    )
+
+    matcher = query.one_of(m1, m2).build()
+    for player in stats.matches(matcher):
+        print(player)
 
 if __name__ == "__main__":
     main()
